@@ -11,11 +11,11 @@
               height="100"
               scroll-target="#scrolling-techniques-2"
             >
-              <template v-slot:img="{ props }">
+             <!--  <template v-slot:img="{ props }">
                 <v-img v-bind="props"></v-img>
               </template>
 
-              <v-app-bar-nav-icon></v-app-bar-nav-icon>
+              <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
               <v-app-bar-title
                 ><h4>Mapa sociolingüístico interactivo</h4>
