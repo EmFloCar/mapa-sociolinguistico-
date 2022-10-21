@@ -48,11 +48,11 @@
         color="green"
         text
       >
-        Acceder
+        Iniciar sesión
       </v-btn>
        <v-row justify="space-around">
     <v-col >
-      <v-dialog
+    <!--   <v-dialog
         transition="dialog-bottom-transition"
         max-width="900"
       >
@@ -88,7 +88,7 @@
             </v-card-actions>
           </v-card>
         </template>
-      </v-dialog>
+      </v-dialog> -->
     </v-col>
     </v-row>
 

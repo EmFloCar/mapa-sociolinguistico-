@@ -13,6 +13,8 @@
                             <v-card v-for="(palabra, index) in palabras" :key="index" class="pa-2" outlined tile>
                                 {{palabra.termino}}
                             </v-card>
+
+                           
                         </v-col>
                     </v-row>
                 </v-container>
