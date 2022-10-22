@@ -10,13 +10,10 @@
               color="#305DBF"
               dark
               height="100"
-              scroll-target="#scrolling-techniques-2"
-            >
-              <template v-slot:img="{ props }">
-                <v-img v-bind="props"></v-img>
-              </template>
 
-              <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            >
+             
+             
 
               <v-app-bar-title
                 ><h4>Mapa sociolingüístico interactivo</h4>
@@ -48,7 +45,7 @@
                               <v-list-item class="px-2">
                                 <v-list-item-avatar>
                                   <v-img
-                                    src="https://randomuser.me/api/portraits/women/85.jpg"
+                                    src="https://i.ibb.co/pjtXJCd/settings.png"
                                   ></v-img>
                                 </v-list-item-avatar>
                               </v-list-item>
@@ -72,21 +69,15 @@
                                 <v-list-item-icon>
                                   <v-icon>mdi-folder</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-title>My Files</v-list-item-title>
+                                <v-list-item-title>Documentación</v-list-item-title>
                               </v-list-item>
                               <v-list-item link>
                                 <v-list-item-icon>
                                   <v-icon>mdi-account-multiple</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-title
-                                  >Shared with me</v-list-item-title
+                                  >Salir</v-list-item-title
                                 >
-                              </v-list-item>
-                              <v-list-item link>
-                                <v-list-item-icon>
-                                  <v-icon>mdi-star</v-icon>
-                                </v-list-item-icon>
-                                <v-list-item-title>Starred</v-list-item-title>
                               </v-list-item>
                             </v-list>
                           </v-navigation-drawer>
@@ -116,15 +107,12 @@
                         </v-toolbar>
 
                         <v-card-title>
-                          <h6>Añadir palabras</h6>
+                          <h6>Gestión lexical</h6>
                         </v-card-title>
 
                         <v-card-text class="text--primary">
                           <div>
-                            Ingrese en el campo correspondiente la palabra o el
-                            termino que desea agregar a la base de datos y
-                            seleccione la(s) comuna(s) a la que pertenece dicha
-                            palabra.
+                            En la siguiente tabla se muestran todas las expresiones lexicales almacenadas en la base de datos.
                           </div>
                         </v-card-text>
                         <v-container>
@@ -310,7 +298,7 @@ export default{
         }
     },
   async mounted(){
-    let response = await axios.get("http://localhost:4000");
+    let response = await axios.get("https://mapa-back.onrender.com");
     this.palabras = response.data;
     console.log(response.data)
     },
@@ -318,7 +306,7 @@ export default{
     methods: {
     async eliminar(id){
         
-        let response = await axios.delete("http://localhost:4000/" + id)
+        let response = await axios.delete("https://mapa-back.onrender.com/" + id)
         this.palabras = this.palabras.filter((el)=>el._id !== id)
         console.log(response)
     },

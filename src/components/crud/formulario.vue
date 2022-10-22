@@ -9,7 +9,7 @@
               color="#305DBF"
               dark
               height="100"
-              scroll-target="#scrolling-techniques-2"
+         
             >
              <!--  <template v-slot:img="{ props }">
                 <v-img v-bind="props"></v-img>
@@ -47,7 +47,7 @@
                               <v-list-item class="px-2">
                                 <v-list-item-avatar>
                                   <v-img
-                                    src="https://randomuser.me/api/portraits/women/85.jpg"
+                                    src="https://i.ibb.co/pjtXJCd/settings.png"
                                   ></v-img>
                                 </v-list-item-avatar>
                               </v-list-item>
@@ -71,22 +71,17 @@
                                 <v-list-item-icon>
                                   <v-icon>mdi-folder</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-title>My Files</v-list-item-title>
+                                <v-list-item-title>Documentación</v-list-item-title>
                               </v-list-item>
                               <v-list-item link>
                                 <v-list-item-icon>
                                   <v-icon>mdi-account-multiple</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-title
-                                  >Shared with me</v-list-item-title
+                                  >Salir</v-list-item-title
                                 >
                               </v-list-item>
-                              <v-list-item link>
-                                <v-list-item-icon>
-                                  <v-icon>mdi-star</v-icon>
-                                </v-list-item-icon>
-                                <v-list-item-title>Starred</v-list-item-title>
-                              </v-list-item>
+                      
                             </v-list>
                           </v-navigation-drawer>
                         </v-card>
@@ -276,7 +271,7 @@ const axios = require("axios");
 export default {
   data() {
     return {
-      ruta: "http://localhost:4000/",
+      ruta: "https://mapa-back.onrender.com/",
       nuevoTermino: {
         termino: "",
         comuna: [],
@@ -292,7 +287,7 @@ export default {
 
     guardar() {
       axios
-        .post("http://localhost:4000/new", this.nuevoTermino)
+        .post("https://mapa-back.onrender.com/new", this.nuevoTermino)
         .then((response) => {
           console.log(response);
         });

@@ -3,13 +3,7 @@
     <div class="colorfondo">
       <v-container fluid>
         <v-card class="overflow-hidden">
-          <v-app-bar
-            absolute
-            color="#305DBF"
-            dark
-            height="100"
-            scroll-target="#scrolling-techniques-2"
-          >
+          <v-app-bar absolute color="#305DBF" dark height="100">
             <template v-slot:img="{ props }">
               <v-img v-bind="props"></v-img>
             </template>
@@ -25,9 +19,16 @@
               <!--              //<v-icon>{{ icons.mdiAccount }}</v-icon> -->
               <div class="mx-2"></div>
             </router-link>
-            <v-btn icon>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+            <!--             <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
-            </v-btn>
+            </v-btn> -->
             <v-dialog transition="dialog-bottom-transition" max-width="900">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" icon>
@@ -36,15 +37,9 @@
               </template>
               <template v-slot:default="dialog">
                 <v-card>
-   
-
                   <v-card-text>
                     <div class="text-h2 pa-12">
-                      <v-card
-                        :loading="loading"
-                        class="mx-auto my-12"
-                        max-width="684"
-                      >
+                      <v-card class="mx-auto my-12" max-width="684">
                         <v-card-title>Acerca de:</v-card-title>
                         <v-card-text>
                           <v-row align="center" class="mx-0"> </v-row>
@@ -59,12 +54,13 @@
                             Montería</b
                           >, es un software derivado del proyecto de
                           investigación que tiene su mismo nombre, cuya
-                          finalidad de identificar de forma cartográfica
-                          (mapa)las distintas expresiones lexicales manifestadas
-                          en las jergas de los grupos sociales representativos
-                          de la ciudad de Montería, tales como los mototaxistas,
-                          los comerciantes, los estudiantes, etc. Distribuidos
-                          en las diferentes comunas de la ciudad para una mejor
+                          finalidad principal es identificar de forma
+                          cartográfica (mapa)e interactiva las distintas
+                          expresiones lexicales manifestadas en las jergas de
+                          los grupos sociales representativos de la ciudad de
+                          Montería - Córdoba, tales como los mototaxistas, los
+                          comerciantes, los estudiantes, etc. Distribuidos en
+                          las diferentes comunas de la ciudad para una mejor
                           comprensión teniendo en cuenta la finalidad pedagógica
                           de este.</v-card-text
                         >
@@ -82,18 +78,32 @@
                           <v-btn class="ma-2" outlined color="success">
                             Ver más
                           </v-btn>
+                          <v-btn text @click="dialog.value = false"
+                            >Cerrar</v-btn
+                          >
                         </v-card-actions>
                       </v-card>
                     </div>
                   </v-card-text>
                   <v-card-actions class="justify-end">
-                    <v-btn class="ma-2" outlined color="primary">
+                    <!--                     <v-btn class="ma-2" outlined color="primary">
                       Equipo de trabajo
-                    </v-btn>
-                    <v-btn class="ma-2" outlined color="orange">
+                    </v-btn> -->
+                    <img
+                      src="https://i.ibb.co/zHcNkgt/unicor.png"
+                      alt="unicor"
+                      border="0"
+                      class="universidad"
+                    />
+                    <!--                     <v-btn class="ma-2" outlined color="orange">
                       Ayuda y soporte
-                    </v-btn>
-                    <v-btn text @click="dialog.value = false">Cerrar</v-btn>
+                    </v-btn> -->
+                    <img
+                      src="https://i.ibb.co/MSgXLHh/l.png"
+                      alt="l"
+                      border="0"
+                      class="lexicon"
+                    />
                   </v-card-actions>
                 </v-card>
               </template>
@@ -101,12 +111,13 @@
             <!--      <v-btn icon>
               <v-icon>mdi-home</v-icon>
             </v-btn> -->
-
-            <v-btn icon>
-              <v-avatar>
-                <img src="https://i.ibb.co/0fHsR36/apoyo.png" alt="admin" />
-              </v-avatar>
-            </v-btn>
+            <router-link :to="{ name: 'login' }" class="noneline">
+              <v-btn icon>
+                <v-avatar>
+                  <img src="https://i.ibb.co/0fHsR36/apoyo.png" alt="admin" />
+                </v-avatar>
+              </v-btn>
+            </router-link>
           </v-app-bar>
           <v-sheet max-height="760">
             <v-container style="height: 1000px;">
@@ -168,6 +179,7 @@
                         :width="this.comunas[com].width"
                         :height="this.comunas[com].height"
                         :palabras="this.comunas[com].palabras"
+                        :search="search"
                       />
                     </div>
                   </v-col>
@@ -193,6 +205,7 @@ export default {
   },
   data() {
     return {
+      search: "",
       icons: {
         mdiAccount,
       },
@@ -205,6 +218,82 @@ export default {
           termino: "Prueba dos",
           comuna: [7, 5, 9],
         },
+        {
+          termino: "Prueba1",
+          comuna: [7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
+        {
+          termino: "Prueddos",
+          comuna: [1, 7, 5, 9],
+        },
       ],
       com: 0,
       comunas: [
@@ -212,8 +301,8 @@ export default {
           comuna: "Montería",
           mapaUrl:
             "https://www.google.com/maps/d/u/0/embed?mid=1Z3zNCXWCoFiz-3CXLTI--4yoougXbSqd&ehbc=2E312F",
-          width: 830,
-          height: 600,
+          width: 610,
+          height: 500,
         }, //general
         {
           comuna: 1,
@@ -331,5 +420,17 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+.universidad {
+  height: 95px;
+  width: 140px;
+  padding-left: 10px;
+}
+.lexicon {
+  width: 100px;
+  height: 90px;
+  display: flex;
+
+  padding-left: 10px;
 }
 </style>

@@ -8,7 +8,7 @@
             color="#305DBF"
             dark
             height="100"
-            scroll-target="#scrolling-techniques-2"
+
           >
             <template v-slot:img="{ props }">
               <v-img v-bind="props"></v-img>
@@ -84,6 +84,9 @@
                             >
                               <p>Aqui se muestran los terminos</p>
                             </div>
+                            <div>
+   
+  </div>
                           </v-card-text>
                           <br />
                           <br />
@@ -119,14 +122,15 @@ export default {
   name: "App",
 
   data: () => ({
+    benched: 0,
     icons: {
       mdiAccount,
     },
-    items: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    items: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     menu: [{ title: "Acerca de" }, { title: "Diccionario electrónico" }],
   }),
   computed: {
-    
+
   },
 
   methods: {

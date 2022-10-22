@@ -4,8 +4,7 @@ import VueRouter from 'vue-router'
 import inicio1 from './components/inicio1'
 import principal1 from './components/principal1'
 import principal from './components/principal'
-import m1 from './components/m1' 
-import creditos from './components/creditos'
+import login from './components/login'
 import formulario from './components/crud/formulario'
 import menu from './components/crud/menu'
 import editar from './components/crud/editar'
@@ -21,6 +20,11 @@ const routes = [
       component: inicio1
     },
     {
+      path:'/login',
+      name:'login',
+      component: login,
+    }, 
+    {
       path: "/principal",
       name: "principal",
       component: principal,
@@ -30,16 +34,7 @@ const routes = [
         name: "principal1",
         component: principal1,
         children:[
-          {
-            path:'/m1',
-            name:'m1',
-            component: m1,
-          }, 
-          {
-            path:'/creditos',
-            name:'creditos',
-            component: creditos,
-          },
+
         ]
     },
     {

@@ -1,58 +1,40 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="3000"
-  >
+  <v-card class="mx-auto" max-width="3000">
     <v-img
       class="white--text align-end"
-     height="524px"
-     width="1420px"
-      src="https://i.ibb.co/nBzVxNc/imgN2.png" alt="imgN2"
+      height="524px"
+      width="1420px"
+      src="https://i.ibb.co/nBzVxNc/imgN2.png"
+      alt="imgN2"
     >
       <v-card-title></v-card-title>
     </v-img>
 
-   
-
     <v-card-text class="text--primary">
-      
-
-      
       <div class="text-center">
-                  <router-link :to="{ name: 'principal' }" class="noneline">
-               <v-btn
-      class="ma-2"
-       rounded
-      outlined
-       width="230"
-      color="primary"
-         dark
-    >
-      Ingresar
-    </v-btn>
-      </router-link>
-       </div>
-      
+        <router-link :to="{ name: 'principal' }" class="noneline">
+          <v-btn class="ma-2" rounded outlined width="230" color="primary" dark>
+            Ingresar
+          </v-btn>
+        </router-link>
+      </div>
     </v-card-text>
 
     <v-card-actions>
-     <v-avatar>
-      <img
-        src="https://i.ibb.co/0fHsR36/apoyo.png"
-        alt="admin"
+      <router-link :to="{ name: 'login' }" class="noneline"> <v-avatar>
+        <img src="https://i.ibb.co/0fHsR36/apoyo.png" alt="admin" />
+      </v-avatar>
+</router-link>
+     
+      <router-link :to="{ name: 'login' }" class="noneline">
+        <v-btn color="green" text>
+          Iniciar sesión
+        </v-btn></router-link
       >
-    </v-avatar>
-    
- 
-      <v-btn
-        color="green"
-        text
-      >
-        Iniciar sesión
-      </v-btn>
-       <v-row justify="space-around">
-    <v-col >
-    <!--   <v-dialog
+
+      <v-row justify="space-around">
+        <v-col>
+          <!--   <v-dialog
         transition="dialog-bottom-transition"
         max-width="900"
       >
@@ -89,20 +71,16 @@
           </v-card>
         </template>
       </v-dialog> -->
-    </v-col>
-    </v-row>
-
-
+        </v-col>
+      </v-row>
     </v-card-actions>
     <center>
-    <v-card-text class="blue--text">
+      <v-card-text class="blue--text">
         {{ new Date().getFullYear() }} — <strong>Universidad de Córdoba</strong>
       </v-card-text>
-      </center>
+    </center>
   </v-card>
-  
 </template>
-
 
 <script>
 export default {
@@ -122,7 +100,7 @@ export default {
 .letraB {
   font: oblique bold 80px cursive;
 }
-.fuente{
-  color: black
+.fuente {
+  color: black;
 }
 </style>
