@@ -19,13 +19,13 @@
               <!--              //<v-icon>{{ icons.mdiAccount }}</v-icon> -->
               <div class="mx-2"></div>
             </router-link>
-            <v-text-field
+            <!-- <v-text-field
               v-model="search"
               append-icon="mdi-magnify"
               label="Search"
               single-line
               hide-details
-            ></v-text-field>
+            ></v-text-field> -->
             <!--             <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
             </v-btn> -->
@@ -179,7 +179,6 @@
                         :width="this.comunas[com].width"
                         :height="this.comunas[com].height"
                         :palabras="this.comunas[com].palabras"
-                        :search="search"
                       />
                     </div>
                   </v-col>
@@ -194,7 +193,7 @@
 </template>
 
 <script>
-//const axios = require("axios");
+// const axios = require("axios");
 import mapa from "./mapa.vue";
 import { mdiAccount } from "@mdi/js";
 export default {
@@ -211,87 +210,27 @@ export default {
       },
       palabras: [
         {
-          termino: "Prueba tres",
+          termino: "basado",
           comuna: [7, 1, 2],
         },
         {
-          termino: "Prueba dos",
-          comuna: [7, 5, 9],
+          termino: "aleman",
+          comuna: [7, 1, 9],
         },
         {
-          termino: "Prueba1",
-          comuna: [7, 5, 9],
+          termino: "casa",
+          comuna: [7, 1, 9],
         },
         {
-          termino: "Prueddos",
+          termino: "domingo",
           comuna: [1, 7, 5, 9],
         },
         {
-          termino: "Prueddos",
+          termino: "xoxo",
           comuna: [1, 7, 5, 9],
         },
         {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "Prueddos",
+          termino: "el pepe",
           comuna: [1, 7, 5, 9],
         },
       ],
@@ -380,9 +319,16 @@ export default {
     };
   },
   async mounted() {
-    /*     let response = await axios.get("http://localhost:4000/");
-    this.palabras = response.data;
-    console.log(response.data); */
+    // let response = await axios.get("https://mapa-back.onrender.com/");
+    // this.palabras = response.data;
+    // console.log(response.data);
+
+    this.palabras.sort((a, b) => {
+      console.log(this.palabras)
+      if(a.termino.toLowerCase() < b.termino.toLowerCase()) return -1
+      if(a.termino.toLowerCase() > b.termino.toLowerCase()) return 1
+      return 0
+    });
 
     for (let index = 1; index < this.comunas.length; index++) {
       for (let i = 0; i < this.palabras.length; i++) {
@@ -399,7 +345,12 @@ export default {
         }
       }
     }
+    
   },
+
+  computed: {
+    
+  }
 };
 </script>
 

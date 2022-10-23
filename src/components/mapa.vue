@@ -10,6 +10,8 @@
               </v-card>
             </v-col>
             <v-col cols="6" md="4">
+              
+
               <v-card
                 v-for="(palabra, index) in palabras"
                 :key="index"
