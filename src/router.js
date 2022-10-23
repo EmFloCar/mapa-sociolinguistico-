@@ -9,6 +9,7 @@ import formulario from './components/crud/formulario'
 import menu from './components/crud/menu'
 import editar from './components/crud/editar'
 import tabla from './components/crud/tabla'
+import noAuth from './components/noAuth'
 
     
 Vue.use(VueRouter)
@@ -24,6 +25,11 @@ const routes = [
       name:'login',
       component: login,
     }, 
+    {
+      path: "/noAuth",
+      name: "noAuth",
+      component: noAuth
+    },
     {
       path: "/principal",
       name: "principal",

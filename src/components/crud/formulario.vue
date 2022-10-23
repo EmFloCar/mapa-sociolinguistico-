@@ -4,14 +4,8 @@
       <div class="colorfondo">
         <v-container fluid>
           <v-card class="overflow-hidden">
-            <v-app-bar
-              absolute
-              color="#305DBF"
-              dark
-              height="100"
-         
-            >
-             <!--  <template v-slot:img="{ props }">
+            <v-app-bar absolute color="#305DBF" dark height="100">
+              <!--  <template v-slot:img="{ props }">
                 <v-img v-bind="props"></v-img>
               </template>
 
@@ -30,7 +24,7 @@
               </router-link>
             </v-app-bar>
             <v-sheet max-height="1200">
-              <v-container style="height: 1200px;">
+              <v-container style="height: 1200px">
                 <br />
                 <br />
                 <br />
@@ -57,31 +51,25 @@
                                   <v-list-item-title class="text-h6">
                                     Administrador
                                   </v-list-item-title>
-                                  <v-list-item-subtitle
-                                    >Administrador01@gmail.com</v-list-item-subtitle
-                                  >
                                 </v-list-item-content>
                               </v-list-item>
                             </v-list>
 
                             <v-divider></v-divider>
 
-                            <v-list nav dense>
-                              <v-list-item link>
+                            <v-list nav>
+                              <v-list-item to="/principal">
                                 <v-list-item-icon>
-                                  <v-icon>mdi-folder</v-icon>
+                                  <v-icon>mdi-home</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-title>Documentación</v-list-item-title>
+                                <v-list-item-title>Inicio</v-list-item-title>
                               </v-list-item>
-                              <v-list-item link>
+                              <v-list-item link v-on:click="cerrarSesion()">
                                 <v-list-item-icon>
                                   <v-icon>mdi-account-multiple</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-title
-                                  >Salir</v-list-item-title
-                                >
+                                <v-list-item-title>Salir</v-list-item-title>
                               </v-list-item>
-                      
                             </v-list>
                           </v-navigation-drawer>
                         </v-card>
@@ -93,17 +81,17 @@
                           <v-tabs dark background-color="primary" grow>
                             <v-tab to="/formulario">
                               <!-- <v-badge color="pink" dot> -->
-                                <span>Agregar</span>
+                              <span>Agregar</span>
 
-                                <v-icon>mdi-plus</v-icon>
+                              <v-icon>mdi-plus</v-icon>
                               <!-- </v-badge> -->
                             </v-tab>
 
                             <v-tab to="/tabla">
                               <!-- <v-badge color="green" content="6"> -->
-                                <span>Administrar</span>
+                              <span>Administrar</span>
 
-                                <v-icon>mdi-lead-pencil</v-icon>
+                              <v-icon>mdi-lead-pencil</v-icon>
                               <!-- </v-badge> -->
                             </v-tab>
                           </v-tabs>
@@ -165,42 +153,6 @@
 
                           <br />
                         </v-card>
-
-                        <!-- <v-form>
-              <v-text-field
-                label="Termino"
-                required
-                outlined
-            dense
-                v-model="nuevoTermino.termino"
-              >
-              </v-text-field>
-              <v-checkbox
-                v-for="comuna in listaComunas"
-                :key="comuna"
-                :label="'Comuna ' + `${comuna}`"
-                :value="comuna"
-                v-model="nuevoTermino.comuna"
-              >
-              </v-checkbox>
-              <v-btn
-                depressed
-                color="primary"
-                v-on:click="guardar(), limpiar()"
-              >
-                Guardar
-              </v-btn>
-            </v-form> -->
-
-                        <!--  <v-card-actions>
-                          <v-btn color="orange" text>
-                            Share
-                          </v-btn>
-
-                          <v-btn color="orange" text>
-                            Explore
-                          </v-btn>
-                        </v-card-actions> -->
                       </v-card>
                       <center>
                         <v-card-text class="blue--text">
@@ -217,52 +169,6 @@
         </v-container>
       </div>
     </v-app>
-
-    <!-- <v-bottom-navigation color="primary" horizontal>
-      <v-btn to="/formulario">
-        <span>Agregar</span>
-
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-
-      <v-btn to="/tabla">
-        <span>Administrar</span>
-
-        <v-icon>mdi-lead-pencil</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
-
-    <v-container class="spacing-playground pa-8 d-flex justify-center">
-      <v-card width="400" class="spacing-playground pa-8">
-        <v-row>
-          <v-col cols="12" class="d-flex justify-center">
-            <v-form>
-              <v-text-field
-                label="Termino"
-                required
-                v-model="nuevoTermino.termino"
-              >
-              </v-text-field>
-              <v-checkbox
-                v-for="comuna in listaComunas"
-                :key="comuna"
-                :label="'Comuna ' + `${comuna}`"
-                :value="comuna"
-                v-model="nuevoTermino.comuna"
-              >
-              </v-checkbox>
-              <v-btn
-                depressed
-                color="primary"
-                v-on:click="guardar(), limpiar()"
-              >
-                Guardar
-              </v-btn>
-            </v-form>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-container> -->
   </div>
 </template>
 
@@ -280,6 +186,11 @@ export default {
       listaComunas: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     };
   },
+  mounted() {
+    if (!localStorage.token) {
+      return this.$router.replace("/noauth");
+    }
+  },
   methods: {
     limpiar() {
       (this.nuevoTermino.termino = ""), (this.nuevoTermino.comuna = []);
@@ -293,6 +204,10 @@ export default {
         });
     },
 
+    cerrarSesion() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
+    },
     // axios.post(this.ruta, this.nuevoTermino).then(response=>{console.log(response)})
   },
 };

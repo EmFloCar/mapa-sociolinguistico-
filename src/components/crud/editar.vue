@@ -1,17 +1,11 @@
 <template>
-<div>
+  <div>
     <v-app>
       <div class="colorfondo">
         <v-container fluid>
           <v-card class="overflow-hidden">
-            <v-app-bar
-              absolute
-              color="#305DBF"
-              dark
-              height="100"
-         
-            >
-             <!--  <template v-slot:img="{ props }">
+            <v-app-bar absolute color="#305DBF" dark height="100">
+              <!--  <template v-slot:img="{ props }">
                 <v-img v-bind="props"></v-img>
               </template>
 
@@ -30,7 +24,7 @@
               </router-link>
             </v-app-bar>
             <v-sheet max-height="1200">
-              <v-container style="height: 1200px;">
+              <v-container style="height: 1200px">
                 <br />
                 <br />
                 <br />
@@ -71,15 +65,15 @@
                                 <v-list-item-icon>
                                   <v-icon>mdi-folder</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-title>Documentación</v-list-item-title>
+                                <v-list-item-title
+                                  >Documentación</v-list-item-title
+                                >
                               </v-list-item>
                               <v-list-item link>
                                 <v-list-item-icon>
                                   <v-icon>mdi-account-multiple</v-icon>
                                 </v-list-item-icon>
-                                <v-list-item-title
-                                  >Salir</v-list-item-title
-                                >
+                                <v-list-item-title>Salir</v-list-item-title>
                               </v-list-item>
                             </v-list>
                           </v-navigation-drawer>
@@ -92,17 +86,17 @@
                           <v-tabs dark background-color="primary" grow>
                             <v-tab to="/formulario">
                               <!-- <v-badge color="pink" dot> -->
-                                <span>Agregar</span>
+                              <span>Agregar</span>
 
-                                <v-icon>mdi-plus</v-icon>
+                              <v-icon>mdi-plus</v-icon>
                               <!-- </v-badge> -->
                             </v-tab>
 
                             <v-tab to="/tabla">
                               <!-- <v-badge color="green" content="6"> -->
-                                <span>Administrar</span>
+                              <span>Administrar</span>
 
-                                <v-icon>mdi-lead-pencil</v-icon>
+                              <v-icon>mdi-lead-pencil</v-icon>
                               <!-- </v-badge> -->
                             </v-tab>
                           </v-tabs>
@@ -138,26 +132,39 @@
                               label="Termino"
                               outlined
                               dense
-                              required v-model="palabra.termino">
+                              required
+                              v-model="palabra.termino"
                             >
+                              >
                             </v-text-field>
                             <v-checkbox
-                            v-for="comuna in listaComunas " :key="comuna" :label="'comuna ' + `${comuna}`"
-                                :value="comuna" v-model="palabra.comuna"
+                              v-for="comuna in listaComunas"
+                              :key="comuna"
+                              :label="'comuna ' + `${comuna}`"
+                              :value="comuna"
+                              v-model="palabra.comuna"
                             >
                             </v-checkbox>
                             <v-divider class="mx-4"></v-divider>
                             <br />
                             <v-col cols="5">
-                    <v-btn depressed color="primary" v-on:click="editar()">
-                        Guardar
-                    </v-btn>
-                </v-col>
-                <v-col cols="5">
-                    <v-btn depressed color="primary" v-on:click="regresar()">
-                        Regresar
-                    </v-btn>
-                </v-col>
+                              <v-btn
+                                depressed
+                                color="primary"
+                                v-on:click="editar()"
+                              >
+                                Guardar
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="5">
+                              <v-btn
+                                depressed
+                                color="primary"
+                                v-on:click="regresar()"
+                              >
+                                Regresar
+                              </v-btn>
+                            </v-col>
                             <br />
                           </v-form>
 
@@ -179,48 +186,48 @@
         </v-container>
       </div>
     </v-app>
-
-  
   </div>
 </template>
 
 <script>
 const axios = require("axios");
 export default {
-    data() {
-        return {
-            idPalabra: null,
-            ruta: "https://mapa-back.onrender.com/",
-            palabra: {
-                termino: "",
-                comuna: [],
-            },
+  data() {
+    return {
+      idPalabra: null,
+      ruta: "https://mapa-back.onrender.com/",
+      palabra: {
+        termino: "",
+        comuna: [],
+      },
 
-            listaComunas: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-        }
+      listaComunas: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    };
+  },
+  methods: {
+    editar() {
+      axios
+        .patch("https://mapa-back.onrender.com/" + this.idPalabra, this.palabra)
+        .then((data) => {
+          console.log(data);
+        });
     },
-    methods: {
-        editar() {
-            axios
-                .patch("https://mapa-back.onrender.com/" + this.idPalabra, this.palabra)
-                .then((data) => {
-                    console.log(data);
-                });
-        },
-        regresar() {
-            this.$router.push('/tabla')
-        }
-
+    regresar() {
+      this.$router.push("/tabla");
     },
-    mounted() {
-        this.idPalabra = this.$route.params.id;
-        axios.get("https://mapa-back.onrender.com/" + this.idPalabra)
-            .then((datos) => {
-                this.palabra.termino = datos.data.termino;
-                this.palabra.comuna = datos.data.comuna;
-            });
-    },
-}
+  },
+  mounted() {
+    if (!localStorage.token) {
+      return this.$router.replace("/noauth");
+    }
+    this.idPalabra = this.$route.params.id;
+    axios
+      .get("https://mapa-back.onrender.com/" + this.idPalabra)
+      .then((datos) => {
+        this.palabra.termino = datos.data.termino;
+        this.palabra.comuna = datos.data.comuna;
+      });
+  },
+};
 </script>
 

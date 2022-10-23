@@ -8,7 +8,7 @@
               <v-img v-bind="props"></v-img>
             </template>
             <router-link :to="{ name: 'inicio1' }" class="noneline">
-              <v-app-bar-title style="color:white;"
+              <v-app-bar-title style="color: white"
                 ><h4>Mapa sociolingüístico interactivo</h4>
                 <h4>de la ciudad de Montería</h4></v-app-bar-title
               >
@@ -120,7 +120,7 @@
             </router-link>
           </v-app-bar>
           <v-sheet max-height="760">
-            <v-container style="height: 1000px;">
+            <v-container style="height: 1000px">
               <br />
               <br />
               <br />
@@ -179,6 +179,7 @@
                         :width="this.comunas[com].width"
                         :height="this.comunas[com].height"
                         :palabras="this.comunas[com].palabras"
+                        :isSearcheble="this.comunas[com].isSearcheble"
                       />
                     </div>
                   </v-col>
@@ -193,7 +194,7 @@
 </template>
 
 <script>
-// const axios = require("axios");
+const axios = require("axios");
 import mapa from "./mapa.vue";
 import { mdiAccount } from "@mdi/js";
 export default {
@@ -209,30 +210,7 @@ export default {
         mdiAccount,
       },
       palabras: [
-        {
-          termino: "basado",
-          comuna: [7, 1, 2],
-        },
-        {
-          termino: "aleman",
-          comuna: [7, 1, 9],
-        },
-        {
-          termino: "casa",
-          comuna: [7, 1, 9],
-        },
-        {
-          termino: "domingo",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "xoxo",
-          comuna: [1, 7, 5, 9],
-        },
-        {
-          termino: "el pepe",
-          comuna: [1, 7, 5, 9],
-        },
+
       ],
       com: 0,
       comunas: [
@@ -242,6 +220,7 @@ export default {
             "https://www.google.com/maps/d/u/0/embed?mid=1Z3zNCXWCoFiz-3CXLTI--4yoougXbSqd&ehbc=2E312F",
           width: 610,
           height: 500,
+          isSearcheble: false,
         }, //general
         {
           comuna: 1,
@@ -250,6 +229,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 2,
@@ -258,6 +238,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 3,
@@ -266,6 +247,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 4,
@@ -274,6 +256,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 5,
@@ -282,6 +265,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 6,
@@ -290,6 +274,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 7,
@@ -298,6 +283,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 8,
@@ -306,6 +292,7 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
         {
           comuna: 9,
@@ -314,20 +301,20 @@ export default {
           width: 610,
           height: 500,
           palabras: [],
+          isSearcheble: true,
         },
       ],
     };
   },
   async mounted() {
-    // let response = await axios.get("https://mapa-back.onrender.com/");
-    // this.palabras = response.data;
-    // console.log(response.data);
+    let response = await axios.get("https://mapa-back.onrender.com/");
+    this.palabras = response.data;
+    console.log(response.data);
 
     this.palabras.sort((a, b) => {
-      console.log(this.palabras)
-      if(a.termino.toLowerCase() < b.termino.toLowerCase()) return -1
-      if(a.termino.toLowerCase() > b.termino.toLowerCase()) return 1
-      return 0
+      if (a.termino.toLowerCase() < b.termino.toLowerCase()) return -1;
+      if (a.termino.toLowerCase() > b.termino.toLowerCase()) return 1;
+      return 0;
     });
 
     for (let index = 1; index < this.comunas.length; index++) {
@@ -345,12 +332,7 @@ export default {
         }
       }
     }
-    
   },
-
-  computed: {
-    
-  }
 };
 </script>
 

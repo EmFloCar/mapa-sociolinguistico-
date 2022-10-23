@@ -31,7 +31,6 @@
                       id="username"
                       name="username"
                       v-model="input.username"
-                      :rules="[() => !!name || 'Este campo es requerido']"
                       label="Usuario"
                       placeholder="Ingrese su usuario"
                       required
@@ -44,7 +43,6 @@
                       id="password"
                       name="password"
                       v-model="input.password"
-                      :rules="[() => !!name || 'Este campo es requerido']"
                       label="Contraseña"
                       placeholder="Ingrese su contraseña"
                       required
@@ -62,9 +60,7 @@
                     </v-btn>
                     <v-spacer></v-spacer>
                     <router-link :to="{ name: 'inicio1' }" class="noneline">
-                      <v-btn color="primary" text>
-                        Volver al inicio
-                      </v-btn>
+                      <v-btn color="primary" text> Volver al inicio </v-btn>
                     </router-link>
                   </v-card-actions>
                 </v-card>
@@ -83,26 +79,24 @@
         </v-card>
       </v-row>
     </v-container>
+    <v-snackbar v-model="snackbar" :timeout="timeout" color="red">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
-<!-- <script>
-/* export default {
-    data: () => ({
-      
-    }),
-  } */
-
-
-        
-</script> -->
-
 <script>
 const axios = require("axios");
 export default {
   name: "Login",
   data() {
     return {
-      name: null,
+      snackbar: false,
+      text: null,
+      timeout: 2000,
       token: "",
 
       input: {
@@ -111,11 +105,11 @@ export default {
       },
     };
   },
- 
+
   mounted() {
     if (localStorage.token) {
       this.token = localStorage.token;
-      this.$router.push("/crud/palabras");
+      this.$router.push("/formulario");
     }
   },
   methods: {
@@ -126,15 +120,18 @@ export default {
           if (response.data.message == "Sesion iniciada con exito") {
             this.token = response.data.token;
             this.persist();
-            return this.$router.push("crud/formulario");
+            return this.$router.push("formulario");
           }
-          /*          if (response.data == "Usuario o contraseña incorrecta" || 'El usuario no existe'){
-                            const mensaje = 'Usuario o contraseña incorrecta'
-                            return this.errorToast(mensaje)
-                        } */
+          if (
+            response.data == "Usuario o contraseña incorrecta" ||
+            response.data == "El usuario no existe"
+          ) {
+            this.text = "Usuario o contraseña incorrecta";
+            return (this.snackbar = true);
+          }
           if (response.data.status == 500) {
-            const mensaje = "Error en el servidor";
-            return this.errorToast(mensaje);
+            this.text = "Error en el servidor";
+            return (this.snackbar = true);
           }
         });
     },
